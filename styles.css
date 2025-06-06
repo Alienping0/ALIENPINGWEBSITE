@@ -524,14 +524,16 @@ body {
   width: 100%;
 }
 
+/* Update the nav-toggle styles to ensure the hamburger icon displays correctly */
 .nav-toggle {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  gap: 4px;
+  gap: 6px;
   padding: var(--space-xs);
   border-radius: var(--radius-small);
   transition: background var(--transition-normal);
+  z-index: 1001;
 }
 
 .nav-toggle:hover {
@@ -539,6 +541,7 @@ body {
 }
 
 .nav-toggle span {
+  display: block;
   width: 25px;
   height: 3px;
   background: var(--text-white);
@@ -1804,6 +1807,101 @@ body {
   font-weight: 500;
 }
 
+/* IMPROVED MOBILE STYLES FOR ROADMAP */
+@media (max-width: 992px) {
+  .roadmap-item {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .roadmap-content {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .roadmap-marker {
+    top: 0;
+    left: 50%;
+  }
+
+  .roadmap-line {
+    left: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .roadmap-container {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .roadmap-item {
+    padding-top: 70px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .roadmap-marker {
+    width: 50px;
+    height: 50px;
+  }
+
+  .marker-number {
+    font-size: 1.2rem;
+  }
+
+  .roadmap-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .roadmap-content {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap-container {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .roadmap-item {
+    padding-top: 60px;
+    margin-bottom: var(--space-md);
+  }
+
+  .roadmap-marker {
+    width: 40px;
+    height: 40px;
+  }
+
+  .marker-number {
+    font-size: 1rem;
+  }
+
+  .roadmap-title {
+    font-size: 1.2rem;
+  }
+
+  .roadmap-content {
+    padding: var(--space-sm);
+  }
+
+  .roadmap-list li {
+    font-size: 0.9rem;
+    padding-left: var(--space-sm);
+  }
+
+  .roadmap-cta {
+    padding: var(--space-md);
+  }
+
+  .roadmap-cta p {
+    font-size: 1.1rem;
+  }
+}
+
 /* Enhanced Tokenomics Section */
 .tokenomics-section {
   background: var(--bg-dark);
@@ -2681,7 +2779,12 @@ body {
   }
 }
 
+/* Make sure the nav-toggle is displayed on mobile */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
   .nav {
     padding: var(--space-sm);
   }
