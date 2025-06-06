@@ -1,4 +1,4 @@
-import { Chart } from "@/components/ui/chart"
+// Remove the problematic import and use Chart.js directly from the CDN
 document.addEventListener("DOMContentLoaded", () => {
   // Mobile Navigation Toggle
   const navToggle = document.getElementById("nav-toggle")
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCountdown()
   // Removed the interval since we don't need to update anything
 
-  // Tokenomics Chart
+  // Tokenomics Chart - Using Chart.js from CDN
   const ctx = document.getElementById("tokenomicsChart")
-  if (ctx) {
+  if (ctx && typeof Chart !== 'undefined') {
     const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
-    },
+    }
   )
 
   animatedElements.forEach((el) => {
