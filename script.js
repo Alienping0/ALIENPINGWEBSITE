@@ -10,16 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Animate hamburger menu
       const spans = navToggle.querySelectorAll("span")
-      spans.forEach((span, index) => {
+      if (spans.length >= 3) {
         if (navMenu.classList.contains("active")) {
-          if (index === 0) span.style.transform = "rotate(45deg) translate(5px, 5px)"
-          if (index === 1) span.style.opacity = "0"
-          if (index === 2) span.style.transform = "rotate(-45deg) translate(7px, -6px)"
+          spans[0].style.transform = "rotate(45deg) translate(5px, 6px)"
+          spans[1].style.opacity = "0"
+          spans[2].style.transform = "rotate(-45deg) translate(5px, -6px)"
         } else {
-          span.style.transform = "none"
-          span.style.opacity = "1"
+          spans.forEach((span) => {
+            span.style.transform = "none"
+            span.style.opacity = "1"
+          })
         }
-      })
+      }
     })
   }
 
