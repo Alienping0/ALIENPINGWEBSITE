@@ -143,56 +143,59 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Newsletter form submission
-  const newsletterForm = document.querySelector(".newsletter-form")
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", async function (e) {
-      e.preventDefault()
+// Newsletter form submission
+const newsletterForm = document.querySelector(".newsletter-form");
+if (newsletterForm) {
+  newsletterForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const emailInput = this.querySelector('input[type="email"]')
-      const email = emailInput.value.trim()
-      const submitButton = this.querySelector('button[type="submit"]')
+    const emailInput = this.querySelector('input[type="email"]');
+    const email = emailInput.value.trim();
+    const submitButton = this.querySelector('button[type="submit"]');
 
-      if (email) {
-        // Disable button and show loading state
-        submitButton.disabled = true
-        submitButton.textContent = "Subscribing..."
+    if (email) {
+      // Disable button and show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = "Subscribing...";
 
-        try {
-          // Send email to your address using a simple email service
-          const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              subject: "New AlienPing Newsletter Signup",
-              message: `New newsletter signup from: ${email}`,
-              _replyto: email,
-              _subject: "New AlienPing Newsletter Signup",
-            }),
-          })
+      try {
+        // Replace with your Google Apps Script web app URL
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzLNRaS9o2mwfe3VULKdZOhTqMzxiP8to8Ia1LkYmU0m9iuOLkn_V1KBwp1qiCmmI0t/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            email: email
+          }),
+        });
 
-          if (response.ok) {
-            showNotification("Thank you! You've been added to our launch notification list.", "success")
-            emailInput.value = ""
-          } else {
-            throw new Error("Failed to submit")
-          }
-        } catch (error) {
-          console.error("Error:", error)
-          showNotification("Something went wrong. Please try again later.", "error")
-        } finally {
-          // Reset button
-          submitButton.disabled = false
-          submitButton.textContent = "Subscribe"
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } else {
-        showNotification("Please enter a valid email address.", "error")
+
+        const result = await response.json();
+        
+        if (result.success) {
+          showNotification(result.message || "Thank you! You've been added to our launch notification list.", "success");
+          emailInput.value = "";
+        } else {
+          throw new Error(result.message || "Failed to subscribe");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        showNotification(error.message || "Something went wrong. Please try again later.", "error");
+      } finally {
+        // Reset button
+        submitButton.disabled = false;
+        submitButton.textContent = "Subscribe";
       }
-    })
-  }
+    } else {
+      showNotification("Please enter a valid email address.", "error");
+    }
+  });
+}
 
   // Notification system
   function showNotification(message, type = "info") {
