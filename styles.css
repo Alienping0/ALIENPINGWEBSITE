@@ -1392,6 +1392,43 @@ body {
   color: var(--text-gray-light);
 }
 
+.features-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.features-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.features-video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3; /* Adjust transparency as needed */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10,10,30,0.7) 0%, rgba(40,10,60,0.5) 100%);
+    z-index: 1;
+}
+
+.features-grid {
+    position: relative;
+    z-index: 2; /* Ensures content stays above video */
+}
+
+/* Keep all your existing feature-card styles */
 /* Enhanced Use Cases Section */
 .use-cases-section {
   background: var(--bg-dark);
@@ -1926,7 +1963,7 @@ body {
   gap: var(--space-xxl);
   align-items: center;
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */ /* Remove this as it's not needed here */
 }
 
 .tokenomics-chart-container {
@@ -1941,6 +1978,12 @@ body {
   margin: 0 auto;
 }
 
+/* Add this new rule for the canvas */
+#tokenomicsChart {
+  position: relative;
+  z-index: 2; /* Ensures chart is above the center image */
+}
+
 .chart-center {
   position: absolute;
   top: 50%;
@@ -1953,8 +1996,10 @@ body {
   border: 4px solid var(--primary-gold);
   box-shadow: var(--glow-gold);
   transition: all var(--transition-normal);
+  z-index: 1; /* Explicitly set lower than canvas */
 }
 
+/* Keep your hover effects */
 .chart-center:hover {
   transform: translate(-50%, -50%) scale(1.1);
   box-shadow: var(--glow-gold-intense);
@@ -1966,6 +2011,7 @@ body {
   object-fit: cover;
   border-radius: var(--radius-full);
 }
+
 
 .tokenomics-info {
   display: flex;

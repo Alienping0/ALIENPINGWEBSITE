@@ -118,16 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
-        labels: ["Liquidity Pool", "Marketing", "Development", "Community Rewards", "COMING SOON"],
+        labels: ["Mods", "Marketing", "Community Rewards", "Dev wallet"],
         datasets: [
           {
-            data: [0, 0, 0, 0, 100],
+            data: [2, 2, 2, 14],
             backgroundColor: [
               "#FFD700", // Gold
               "#FF5722", // Orange
               "#4CAF50", // Green
               "#9C27B0", // Purple
-              "#E0E0E0", // Light Gray for "COMING SOON"
+              //"#E0E0E0",  Light Gray for "COMING SOON"
             ],
             borderWidth: 0,
             hoverOffset: 10,
