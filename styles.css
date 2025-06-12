@@ -2254,7 +2254,7 @@ body {
 }
 
 .social-card.telegram:hover {
-  background: linear-gradient(135deg, #0088cc, #006699);
+  background: linear-gradient(135deg, #0178b4, #004568);
   border-color: #0088cc;
   box-shadow: var(--shadow-hard), 0 0 30px rgba(0, 136, 204, 0.5);
 }
@@ -2281,6 +2281,12 @@ body {
   background: linear-gradient(135deg, #ff5700, #cc4500);
   border-color: #ff5700;
   box-shadow: var(--shadow-hard), 0 0 30px rgba(255, 87, 0, 0.5);
+}
+
+.social-card.youtube:hover {
+  background: linear-gradient(135deg, #FF0000, #CC0000);
+  border-color: #FF0000;
+  box-shadow: var(--shadow-hard), 0 0 30px rgba(255, 0, 0, 0.5);
 }
 
 /* Enhanced Newsletter Signup */
