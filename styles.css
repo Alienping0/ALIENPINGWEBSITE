@@ -1392,6 +1392,7 @@ body {
   color: var(--text-gray-light);
 }
 
+/* Video Background Styles */
 .features-section {
     position: relative;
     overflow: hidden;
@@ -1410,7 +1411,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3; /* Adjust transparency as needed */
+    opacity: 0.25; /* Adjust transparency */
 }
 
 .video-overlay {
@@ -1419,16 +1420,26 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10,10,30,0.7) 0%, rgba(40,10,60,0.5) 100%);
+    background: radial-gradient(circle, rgba(10,5,30,0.7) 0%, rgba(40,10,80,0.5) 100%);
     z-index: 1;
 }
 
-.features-grid {
+/* Ensure content stays above video */
+.features-grid,
+.section-header {
     position: relative;
-    z-index: 2; /* Ensures content stays above video */
+    z-index: 2;
 }
 
-/* Keep all your existing feature-card styles */
+/* Mobile Fallback */
+@media (max-width: 768px) {
+    .features-video-bg video {
+        display: none;
+    }
+    .features-video-bg {
+        background: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alienping.jpg-I2xxX7Ss90r7ey6TrWxJ1UoF9YhYkN.jpeg') center/cover;
+    }
+}
 /* Enhanced Use Cases Section */
 .use-cases-section {
   background: var(--bg-dark);
