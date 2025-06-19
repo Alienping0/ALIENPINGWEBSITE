@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         labels: ["Mods", "Marketing", "Community Rewards", "Dev wallet"],
         datasets: [
           {
-            data: [2, 2, 2, 14],
+            data: [2, 2, 2, 13.75],
             backgroundColor: [
               "#FFD700", // Gold
               "#FF5722", // Orange
