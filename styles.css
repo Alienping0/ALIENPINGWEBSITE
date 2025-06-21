@@ -3436,3 +3436,165 @@ body {
     transform: translateY(-3px);
   }
 }
+
+/* Updated Incentive Program Styles - No Moving Effects */
+.incentive-program {
+  background: var(--bg-card);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: var(--radius-medium);
+  padding: var(--space-xl);
+  margin-top: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* REMOVED: Moving shimmer effect */
+/* .incentive-program::before - DELETED */
+
+.incentive-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.8rem;
+  color: var(--primary-gold);
+  text-align: center;
+  margin-bottom: var(--space-md);
+  text-shadow: var(--glow-gold);
+  letter-spacing: 2px;
+}
+
+.incentive-highlight {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 87, 34, 0.2));
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: var(--radius-small);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.incentive-amount {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.incentive-description {
+  color: var(--text-white);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.incentive-requirements {
+  list-style: none;
+  margin-top: var(--space-md);
+}
+
+.incentive-requirements li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--bg-glass);
+  border-radius: var(--radius-small);
+  border-left: 4px solid var(--primary-orange);
+  transition: all var(--transition-normal);
+}
+
+.incentive-requirements li:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(5px);
+  border-left-color: var(--primary-gold);
+}
+
+.requirement-icon {
+  color: var(--primary-orange);
+  margin-right: var(--space-sm);
+  font-size: 1.2rem;
+  margin-top: 2px;
+  transition: transform var(--transition-bounce);
+}
+
+.incentive-requirements li:hover .requirement-icon {
+  transform: scale(1.2);
+  color: var(--primary-gold);
+}
+
+.requirement-text {
+  color: var(--text-gray-light);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.incentive-cta {
+  text-align: center;
+  margin-top: var(--space-xl);
+  padding: var(--space-md);
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: var(--radius-small);
+  border: 1px dashed rgba(255, 215, 0, 0.3);
+}
+
+.incentive-cta-text {
+  color: var(--primary-gold);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.incentive-note {
+  color: var(--text-gray-light);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Action steps styling */
+.action-steps {
+  list-style: none;
+  margin-top: var(--space-sm);
+  text-align: left;
+  display: inline-block;
+}
+
+.action-steps li {
+  color: var(--text-gray-light);
+  margin-bottom: var(--space-xs);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.action-steps li::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  color: var(--primary-gold);
+  font-size: 0.8rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .incentive-program {
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+  }
+  
+  .incentive-title {
+    font-size: 1.5rem;
+  }
+  
+  .incentive-amount {
+    font-size: 1.2rem;
+  }
+  
+  .incentive-description {
+    font-size: 1rem;
+  }
+  
+  .incentive-requirements li {
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  .action-steps {
+    text-align: center;
+  }
+}
