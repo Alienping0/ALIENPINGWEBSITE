@@ -490,7 +490,7 @@ body {
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: var(--space-xl);
+  gap: 1.5rem; /* Custom 24px gap */
 }
 
 .nav-link {
