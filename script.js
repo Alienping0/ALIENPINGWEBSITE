@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Countdown Timer
   function updateCountdown() {
-    const launchDate = new Date('July 25, 2025 00:00:00 UTC').getTime();
+    const launchDate = new Date('July 25, 2025 18:30:00 UTC').getTime();
     const now = new Date().getTime();
     const distance = launchDate - now;
     
