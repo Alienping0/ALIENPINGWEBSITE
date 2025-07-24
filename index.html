@@ -41,6 +41,7 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#developer" class="nav-link">Meet the Dev!</a></li>
+                <li><a href="#whitepaper" class="nav-link">Whitepaper</a></li>
                 <li><a href="#features" class="nav-link">Features</a></li>
                 <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
                 <li><a href="#tokenomics" class="nav-link">Tokenomics</a></li>
@@ -121,11 +122,9 @@
                             $ALIENPING is a meme-powered intergalactic currency and crypto community built to resist the shallow hype cycles and rug-pull culture plaguing Telegram trendings. In a space where paying for visibility is easy — and often dangerous — $ALIENPING flips the model. Projects won't just buy their way into the spotlight; they'll earn it.
                         </p>
                         <p class="about-paragraph">
-                            Before any project gets the $ALIENPING Trending Green Signal, it must undergo a human-powered verification process that involves checking real holders, whitepaper validity, roadmap integrity, and having an open conversation with the project's owner. This is a meme coin with meaning — filtering out quick-flip scams and signaling real builders.
-                        </p>
+                            Before any project gets the $ALIENPING Trending Green Signal, it must undergo a rigorous human-powered verification process that involves checking real holders, whitepaper validity, roadmap integrity, and having an open conversation with the project's owner. This is a meme coin with meaning — filtering out quick-flip scams and signaling real builders.                        </p>
                         <p class="about-paragraph">
-                            Our community blends humor and integrity, attracting alien fanatics and serious creators who are tired of low-effort pump-and-dump schemes. If you're building something that matters — or love aliens — WELCOME HOME!.
-                        </p>
+                             Our community blends humor and integrity, attracting alien fanatics and serious creators who are tired of low-effort pump-and-dump schemes. If you're building something that matters — or love aliens — WELCOME HOME!                        </p>
                         <p class="about-paragraph">
                             Join the $ALIENPING revolution!
                         </p>
@@ -244,6 +243,52 @@
             </div>
         </section>
 
+        <!-- Whitepaper Section -->
+        <section id="whitepaper" class="section whitepaper-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Project <span class="highlight">Whitepaper</span></h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Read our detailed technical documentation</p>
+                </div>
+                
+                <div class="whitepaper-container">
+                    <div class="pdf-controls">
+                        <button id="prev-page" class="pdf-button">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <span id="page-num" class="page-counter">Page 1 of 1</span>
+                        <button id="next-page" class="pdf-button">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <span class="zoom-controls">
+                            <button id="zoom-in" class="pdf-button" title="Zoom In">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button id="zoom-out" class="pdf-button" title="Zoom Out">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="pdf-viewer-container">
+                        <canvas id="pdf-canvas"></canvas>
+                    </div>
+                    
+                    <div class="whitepaper-download">
+                        <a href="AlienPing_WhitePaper.pdf" download class="btn btn-primary glow-effect" id="download-btn">
+                            <i class="fas fa-download"></i> Download Whitepaper
+                        </a>
+                        <p class="download-note">PDF, 1MB</p>
+                        <div id="download-notification" class="download-notification">
+                            <i class="fas fa-check-circle"></i> Check your downloads folder!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
         <section id="features" class="section features-section">
             <div class="container">
                 <div class="section-header">
@@ -254,12 +299,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">🔍</div>
                         <h3 class="feature-title">Project Vetting</h3>
-                        <p class="feature-description">Thorough analysis of wallets, holders, and MarketCap to reject risky coins</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🚀</div>
-                        <h3 class="feature-title">Trending Bot</h3>
-                        <p class="feature-description">Unique bot that ensures approved projects trend post-payment</p>
+                        <p class="feature-description">Thorough human analysis of wallets, holders, and MarketCap to reject risky coins</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🔒</div>
@@ -269,17 +309,22 @@
                     <div class="feature-card">
                         <div class="feature-icon">💰</div>
                         <h3 class="feature-title">Real Utility</h3>
-                        <p class="feature-description">Our bot adds real value to the ecosystem, not just hype</p>
+                        <p class="feature-description">>Our verification system adds real value to the ecosystem, not just hype</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🤝</div>
                         <h3 class="feature-title">Partnerships</h3>
-                        <p class="feature-description">Strategic partnerships with Skeleton Bot and WTF Trending</p>
+                        <p class="feature-description">Strategic partnerships with trusted communities</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3 class="feature-title">Human Verification</h3>
+                        <p class="feature-description">Every project is manually checked by our team</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎮</div>
                         <h3 class="feature-title">Community Raids</h3>
-                        <p class="feature-description">Weekly community raid rewards every Thursday</p>
+                        <p class="feature-description">Random community raid rewards.</p>
                     </div>
                 </div>
             </div>
@@ -472,50 +517,50 @@
                                 <div class="allocation-label">
                                     <span class="color-dot" style="background-color: #FFD700;"></span>
                                     <span>Mods<br>
-                                        <small>vested over 86 months</small>
+                                        <small>vested over 96 months</small>
                                     </span>
                                 </div>
                                 <div class="allocation-bar">
-                                    <div class="allocation-fill" style="width: 2%; background-color: #FFD700;"></div>
+                                    <div class="allocation-fill" style="width: 2.5%; background-color: #FFD700;"></div>
                                 </div>
-                                <div class="allocation-percentage">2%</div>
+                                <div class="allocation-percentage">2.5%</div>
                             </div>
                             <div class="allocation-item">
                                 <div class="allocation-label">
                                     <span class="color-dot" style="background-color: #FF5722;"></span>
                                     <span>Marketing<br>
-                                        <small>vested over 48 months</small>
+                                        <small>vested over 60 months</small>
                                     </span>
                                 </div>
                                 <div class="allocation-bar">
-                                    <div class="allocation-fill" style="width: 2%; background-color: #FF5722;"></div>
+                                    <div class="allocation-fill" style="width: 2.5%; background-color: #FF5722;"></div>
                                 </div>
-                                <div class="allocation-percentage">2%</div>
+                                <div class="allocation-percentage">2.5%</div>
                             </div>
                             <div class="allocation-item">
                                 <div class="allocation-label">
                                     <span class="color-dot" style="background-color: #4CAF50;"></span>
                                     <span>Community Rewards<br>
-                                        <small>vested over 86 months</small>
+                                        <small>vested over 96 months</small>
                                     </span>
                                 </div>
                                 <div class="allocation-bar">
-                                    <div class="allocation-fill" style="width: 2%; background-color: #4CAF50;"></div>
+                                    <div class="allocation-fill" style="width: 2.15%; background-color: #4CAF50;"></div>
                                 </div>
-                                <div class="allocation-percentage">2%</div>
+                                <div class="allocation-percentage">2.15%</div>
                             </div>
                             <div class="allocation-item">
                                 <div class="allocation-label">
                                     <span class="color-dot" style="background-color: #9C27B0;"></span>
-                                    <span>Dev wallet<br>
-                                        <small>vested over 120 months</small>
+                                    <span>General Dev Allocation<br>
+                                        <small>vested over 180 months</small>
                                         <small>- scaling, upgrades, team support.</small>
                                     </span>
                                 </div>
                                 <div class="allocation-bar">
                                     <div class="allocation-fill" style="width: 13.75%; background-color: #9C27B0;"></div>
                                 </div>
-                                <div class="allocation-percentage">13.75%</div>
+                                <div class="allocation-percentage">12.8%</div>
                             </div>
                         </div>
                     </div>
@@ -535,7 +580,7 @@
                     <h3 class="incentive-title">🚀 PRE-LAUNCH INCENTIVE 🚀</h3>
                     
                     <div class="incentive-highlight">
-                        <div class="incentive-amount">0.25% Supply (50,000 coins each)</div>
+                        <div class="incentive-amount">0.05% Supply (10,000 coins each)</div>
                         <div class="incentive-description">for the Top 50 Members during pre-launch phase</div>
                     </div>
                     
@@ -610,18 +655,8 @@
                         <span>YouTube</span>
                     </a>
                 </div>
-                
-                <div class="newsletter-signup">
-                    <h3 class="newsletter-title">Get Notified at Launch</h3>
-                    <p class="newsletter-description">Be the first to know when $ALIENPING launches</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
-                        <button type="submit" class="btn btn-primary glow-effect">Subscribe</button>
-                    </form>
-                </div>
             </div>
         </section>
-
 
         
         <section id="faq" class="section faq-section">
@@ -647,19 +682,6 @@
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>How does the AlienPing bot work?</h3>
-                            <div class="faq-icon">
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Our bot analyzes projects by examining wallets, holders, and MarketCap data to filter out risky coins. It ensures that only vetted projects trend post-payment, adding real utility to the ecosystem and delivering value to our community.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
                             <h3>What are the tokenomics of AlienPing?</h3>
                             <div class="faq-icon">
                                 <span></span>
@@ -667,13 +689,13 @@
                             </div>
                         </div>
                         <div class="faq-answer">
-                            <p>Total Supply is $1,000,000. Liquidity will be locked after launch. The pre-launch token allocation is for 2% for mods(86mo), 2% for marketing(48mo), 2% for community rewards(86mo) and 13.75% for Dev wallet(120mo) - scaling, upgrades, team support.</p>
+                            <p>Total Supply is $1,000,000. Liquidity will be locked after launch. The pre-launch token allocation is for 2.5% for mods(96mo), 2.5% for marketing(60mo), 2.15% for community rewards(96mo) and 12.8% for Dev wallet(180mo) - scaling, upgrades, team support.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>How can I earn 50,000 free AlienPing tokens?</h3>
+                            <h3>How can I earn 10,000 free AlienPing tokens?</h3>
                             <div class="faq-icon">
                                 <span></span>
                                 <span></span>
@@ -715,6 +737,7 @@
                         <ul class="footer-list">
                             <li><a href="#about" class="footer-link">About</a></li>
                             <li><a href="#developer" class="footer-link">Meet the Dev!</a></li>
+                            <li><a href="#whitepaper" class="footer-link">Whitepaper</a></li>
                             <li><a href="#features" class="footer-link">Features</a></li>
                             <li><a href="#roadmap" class="footer-link">Roadmap</a></li>
                             <li><a href="#tokenomics" class="footer-link">Tokenomics</a></li>
@@ -758,5 +781,20 @@
     <script defer src="/_vercel/insights/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="script.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function(e) {
+            // Show notification immediately
+            const notification = document.getElementById('download-notification');
+            notification.classList.add('show');
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+            
+            // Allow the download to proceed naturally
+            // No need to prevent default or return false
+        });
+        </script>
 </body>
 </html>

@@ -179,10 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
-        labels: ["Mods", "Marketing", "Community Rewards", "Dev wallet"],
+        labels: ["Mods", "Marketing", "Community Rewards", "General Dev Allocation"],
         datasets: [
           {
-            data: [2, 2, 2, 13.75],
+            data: [2.5, 2.5, 2.15, 12.8],
             backgroundColor: [
               "#FFD700", // Gold
               "#FF5722", // Orange
@@ -247,59 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  // Newsletter Form
-  const newsletterForm = document.querySelector(".newsletter-form");
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const emailInput = this.querySelector('input[type="email"]');
-      const email = emailInput.value.trim();
-      const submitButton = this.querySelector('button[type="submit"]');
-
-      // Basic email validation
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showNotification("Please enter a valid email address.", "error");
-        emailInput.focus();
-        return;
-      }
-
-      submitButton.disabled = true;
-      submitButton.textContent = "Subscribing...";
-
-      try {
-        // Using FormSubmit.co service
-        const response = await fetch("https://formsubmit.co/ajax/emmanuelabara265@gmail.com", {
-          method: "POST",
-          headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            email: email,
-            _subject: "New Newsletter Subscription",
-            _template: "table" // Makes the email look nicer
-          })
-        });
-
-        const result = await response.json();
-        
-        if (response.ok) {
-          showNotification("Thank you for subscribing!", "success");
-          emailInput.value = "";
-        } else {
-          throw new Error(result.message || "Subscription failed");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        showNotification(error.message || "Subscription failed. Please try again.", "error");
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "Subscribe";
-      }
-    });
-  }
 
   // Animate roadmap progress bars on scroll
   const roadmapItems = document.querySelectorAll(".roadmap-item");
@@ -449,4 +396,212 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastScrollTop = scrollTop;
   });
+  
+  setTimeout(initPDFViewer, 100);
 });
+
+// PDF Viewer Functions
+function initPDFViewer() {
+  // Debug check
+  console.log('Initializing PDF viewer...');
+  
+  // First check if buttons exist and are clickable
+  const testButtons = () => {
+    const prevBtn = document.getElementById('prev-page');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        console.log('Previous button clicked!');
+      });
+    } else {
+      console.error('Previous button not found!');
+    }
+  };
+  
+  // Initial test
+  testButtons();
+  
+  // Now handle PDF.js initialization
+  if (typeof pdfjsLib === 'undefined') {
+    console.log('Loading PDF.js library...');
+    const pdfjsScript = document.createElement('script');
+    pdfjsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
+    pdfjsScript.onload = () => {
+      console.log('PDF.js loaded, initializing viewer...');
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+      setupPDFViewer();
+    };
+    pdfjsScript.onerror = () => {
+      showPDFError('Failed to load PDF viewer library');
+    };
+    document.head.appendChild(pdfjsScript);
+  } else {
+    console.log('PDF.js already loaded');
+    setupPDFViewer();
+  }
+}
+
+function setupPDFViewer() {
+  try {
+    console.log('Setting up PDF viewer...');
+    
+    const pdfPath = 'AlienPing_WhitePaper.pdf';
+    let pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1.5;
+    
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas?.getContext('2d');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const zoomInBtn = document.getElementById('zoom-in');
+    const zoomOutBtn = document.getElementById('zoom-out');
+    const pageNumElem = document.getElementById('page-num');
+    
+    // Verify all elements exist
+    if (!canvas || !ctx || !prevBtn || !nextBtn || !zoomInBtn || !zoomOutBtn || !pageNumElem) {
+      throw new Error('Missing required PDF viewer elements');
+    }
+    
+    // Add temporary test handlers
+    prevBtn.addEventListener('click', () => console.log('Prev button works!'));
+    nextBtn.addEventListener('click', () => console.log('Next button works!'));
+    
+    // Render function
+    const renderPage = (num) => {
+      pageRendering = true;
+      pdfDoc.getPage(num).then((page) => {
+        const viewport = page.getViewport({ scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        const renderContext = { canvasContext: ctx, viewport };
+        page.render(renderContext).promise.then(() => {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+          pageNumElem.textContent = `Page ${num} of ${pdfDoc.numPages}`;
+        });
+      }).catch(handlePDFError);
+    };
+    
+    // Navigation functions
+    const prevPage = () => {
+      if (pageNum > 1) {
+        pageNum--;
+        queueRenderPage(pageNum);
+      }
+    };
+    
+    const nextPage = () => {
+      if (pdfDoc && pageNum < pdfDoc.numPages) {
+        pageNum++;
+        queueRenderPage(pageNum);
+      }
+    };
+    
+    const queueRenderPage = (num) => {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    };
+    
+    // Zoom functions
+    const zoomIn = () => {
+      if (scale < 3) {
+        scale += 0.25;
+        queueRenderPage(pageNum);
+      }
+    };
+    
+    const zoomOut = () => {
+      if (scale > 0.5) {
+        scale -= 0.25;
+        queueRenderPage(pageNum);
+      }
+    };
+    
+    // Attach final event handlers
+    prevBtn.addEventListener('click', prevPage);
+    nextBtn.addEventListener('click', nextPage);
+    zoomInBtn.addEventListener('click', zoomIn);
+    zoomOutBtn.addEventListener('click', zoomOut);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      
+      switch(e.key) {
+        case 'ArrowLeft': prevPage(); break;
+        case 'ArrowRight': nextPage(); break;
+        case '+': case '=': zoomIn(); break;
+        case '-': zoomOut(); break;
+      }
+    });
+    
+    // Load the PDF document
+    pdfjsLib.getDocument({
+      url: pdfPath,
+      cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
+      cMapPacked: true
+    }).promise.then((pdfDoc_) => {
+      pdfDoc = pdfDoc_;
+      pageNumElem.textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+      renderPage(pageNum);
+    }).catch(handlePDFError);
+    
+  } catch (error) {
+    handlePDFError(error);
+  }
+}
+
+function handlePDFError(error) {
+  console.error('PDF Error:', error);
+  const container = document.querySelector('.pdf-viewer-container');
+  if (container) {
+    container.innerHTML = `
+      <div class="pdf-error" style="
+        color: #ff6b6b;
+        padding: 20px;
+        text-align: center;
+        font-family: sans-serif;
+      ">
+        PDF Error: ${error.message}
+        <div style="margin-top: 10px;">
+          <button onclick="location.reload()" style="
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          ">
+            Try Again
+          </button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// CSS Debugging - Add this temporarily
+const debugCSS = `
+  #prev-page, #next-page, #zoom-in, #zoom-out {
+    border: 2px solid red !important;
+    position: relative !important;
+    z-index: 9999 !important;
+  }
+  
+  .pdf-button {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+`;
+const style = document.createElement('style');
+style.textContent = debugCSS;
+document.head.appendChild(style);
