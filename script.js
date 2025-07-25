@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       // Launch date has passed
       if (countdownElement) {
-        countdownElement.innerHTML = '<div class="launch-message"><h3 class="coming-soon-text">🚀 AlienPing Has Launched! 🚀</h3></div>';
+        countdownElement.innerHTML = '<div class="launch-message"><h3 class="coming-soon-text">🚀 AlienPing Has Launched! JOIN TELEGRAM COMMUNITY 🚀</h3></div>';
       }
       clearInterval(countdownInterval);
     }
