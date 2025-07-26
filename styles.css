@@ -3984,9 +3984,9 @@ body {
   width: 6px;
   height: 6px;
   background: var(--primary-green);
-  border-radius: 50%;
+  border-radius: 30%;
   animation: pulse 1.5s infinite;
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
 #current-price {
@@ -3997,10 +3997,10 @@ body {
 }
 
 #price-change {
-  font-size: 0.65rem;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-weight: 600;
+  font-size: 0.5rem;
+  padding: 2px 6px;
+  border-radius: 9px;
+  font-weight: 400;
   transition: all 0.3s ease;
 }
 
@@ -4552,7 +4552,7 @@ body {
   }
 
   #contract-address {
-    font-size: 0.2rem;
+    font-size: 0.8rem;
   }
 }
 
