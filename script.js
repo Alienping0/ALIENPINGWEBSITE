@@ -528,6 +528,68 @@ function handlePDFError(error) {
   }
 }
 
+// Fallback copy method
+function fallbackCopyToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed"; // Avoid scrolling to bottom
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    const successful = document.execCommand('copy');
+    if (!successful) throw new Error('Copy command failed');
+  } catch (err) {
+    console.error('Fallback copy failed:', err);
+    throw err;
+  } finally {
+    document.body.removeChild(textArea);
+  }
+}
+
+// Updated copy function with fallback
+function copyAddress() {
+  const addressElement = document.getElementById('contract-address');
+  const address = addressElement.textContent.trim();
+  
+  if (address === '[YOUR_TOKEN_ADDRESS]') {
+    showNotification('Please set a real contract address first', 'error');
+    return;
+  }
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(address).then(() => {
+      showCopySuccess();
+    }).catch(() => {
+      // If clipboard API fails, try fallback
+      try {
+        fallbackCopyToClipboard(address);
+        showCopySuccess();
+      } catch (err) {
+        showNotification('Failed to copy address', 'error');
+      }
+    });
+  } else {
+    // Browser doesn't support clipboard API, use fallback
+    try {
+      fallbackCopyToClipboard(address);
+      showCopySuccess();
+    } catch (err) {
+      showNotification('Failed to copy address', 'error');
+    }
+  }
+}
+
+function showCopySuccess() {
+  const notification = document.getElementById('copy-notification');
+  notification.classList.add('show');
+  
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 2000);
+}
+
 // CSS Debugging - Add this temporarily
 const debugCSS = `
   #prev-page, #next-page, #zoom-in, #zoom-out {
