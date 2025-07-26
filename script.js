@@ -112,67 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Countdown Timer
-  function updateCountdown() {
-    const launchDate = new Date('July 25, 2025 18:30:00 UTC').getTime();
-    const now = new Date().getTime();
-    const distance = launchDate - now;
-    
-    const countdownElement = document.getElementById('countdown');
-    
-    if (distance > 0) {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      // Create countdown timer HTML if it doesn't exist
-      if (countdownElement && !document.getElementById('days')) {
-        countdownElement.innerHTML = `
-          <div class="countdown-timer">
-            <div class="countdown-item">
-              <div class="countdown-number" id="days">00</div>
-              <div class="countdown-label">Days</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="hours">00</div>
-              <div class="countdown-label">Hours</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="minutes">00</div>
-              <div class="countdown-label">Minutes</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="seconds">00</div>
-              <div class="countdown-label">Seconds</div>
-            </div>
-          </div>
-        `;
-      }
-      
-      // Update countdown display
-      const daysElement = document.getElementById('days');
-      const hoursElement = document.getElementById('hours');
-      const minutesElement = document.getElementById('minutes');
-      const secondsElement = document.getElementById('seconds');
-      
-      if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
-      if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
-      if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
-      if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
-    } else {
-      // Launch date has passed
-      if (countdownElement) {
-        countdownElement.innerHTML = '<div class="launch-message"><h3 class="coming-soon-text">🚀 AlienPing Has Launched! JOIN TELEGRAM COMMUNITY 🚀</h3></div>';
-      }
-      clearInterval(countdownInterval);
-    }
-  }
-  
-  // Initialize countdown and update every second
-  updateCountdown();
-  const countdownInterval = setInterval(updateCountdown, 1000);
-
   // Tokenomics Chart - Using Chart.js from CDN
   const ctx = document.getElementById("tokenomicsChart");
   if (ctx && typeof Chart !== 'undefined') {

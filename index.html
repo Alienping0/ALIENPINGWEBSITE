@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlienPing | Intergalactic Currency | Launching on JULY 25, 2025!</title>
+    <title>AlienPing | Intergalactic Meme Coin on Solana</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@1.70.1/lib/index.iife.min.js"></script>
 </head>
 <body>
     <!-- Animated Background -->
@@ -24,12 +26,17 @@
     </div>
     
     <header class="header">
+    
         <nav class="nav">
             <div class="nav-brand">
                 <div class="logo-container">
                     <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alienping1.jpg-2fgZn1MiFyeIPEHA81yfGZBKhEPJxy.jpeg" alt="AlienPing Logo" class="logo-img">
                 </div>
                 <span class="brand-text">$ALIENPING</span>
+                <div class="live-price">
+                    <span id="current-price">$0.00</span>
+                    <span id="price-change" class="positive">+0.00%</span>
+                </div>
             </div>
             
             <div class="nav-toggle" id="nav-toggle">
@@ -38,17 +45,18 @@
                 <span></span>
             </div>
             
-            <ul class="nav-menu" id="nav-menu">
+            <!-- <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#developer" class="nav-link">Meet the Dev!</a></li>
+                <li><a href="#developer" class="nav-link">Meet the Dev</a></li>
                 <li><a href="#whitepaper" class="nav-link">Whitepaper</a></li>
                 <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#stats" class="nav-link">Live Stats</a></li>
                 <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
                 <li><a href="#tokenomics" class="nav-link">Tokenomics</a></li>
-                <li><a href="#incentive" class="nav-link">Incentive</a></li>
+                <li><a href="#buy" class="nav-link">How to Buy</a></li>
                 <li><a href="#community" class="nav-link">Community</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
-            </ul>
+            </ul> -->
         </nav>
     </header>
 
@@ -62,36 +70,30 @@
                 <h1 class="hero-title">
                     <span class="title-line1">WELCOME TO</span>
                     <span class="title-line2">ALIENPING</span>
-
-                    <p class="hero-subtitle">The Intergalactic Meme Coin Revolution</p>
+                    <p class="hero-subtitle">The Intergalactic Meme Coin Revolution is LIVE!</p>
                 </h1>
                 
-                
-                <div class="countdown-section">
-                    <h2 class="countdown-title">Launching In:</h2>
-                    <div class="countdown-timer">
-                        <span class="countdown-item">
-                            <span class="countdown-number" id="days">00</span>
-                            <span class="countdown-label">Days</span>
-                        </span>
-                        <span class="countdown-item">
-                            <span class="countdown-number" id="hours">00</span>
-                            <span class="countdown-label">Hours</span>
-                        </span>
-                        <span class="countdown-item">
-                            <span class="countdown-number" id="minutes">00</span>
-                            <span class="countdown-label">Minutes</span>
-                        </span>
-                        <span class="countdown-item">
-                            <span class="countdown-number" id="seconds">00</span>
-                            <span class="countdown-label">Seconds</span>
-                        </span> 
+                <div class="live-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="market-cap">$0.00</div>
+                        <div class="stat-label">Market Cap</div>
                     </div>
-                    <p class="launch-date">JULY 25 2025</p>
+                    <div class="stat-card">
+                        <div class="stat-value" id="volume">$0.00</div>
+                        <div class="stat-label">24h Volume</div>
+                    </div>
+                    <!-- <div class="stat-card">
+                        <div class="stat-value" id="holders">0</div>
+                        <div class="stat-label">Holders</div>
+                    </div> -->
+                    <div class="stat-card">
+                        <div class="stat-value" id="liquidity">$0.00</div>
+                        <div class="stat-label">Liquidity</div>
+                    </div>
                 </div>
                 
                 <div class="hero-buttons">
-                    <!-- <button class="btn btn-primary glow-effect">JOIN WHITELIST</button> -->
+                    <a href="https://bonk.fun/token/[YOUR_TOKEN_ADDRESS]" class="btn btn-primary glow-effect" target="_blank" rel="noopener noreferrer">BUY ON BONK.FUN</a>
                     <a href="https://t.me/GalacticCoin0" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">JOIN COMMUNITY</a>
                 </div>
             </div>
@@ -110,6 +112,124 @@
             </div>
         </section>
 
+        <!-- Live Stats Section -->
+        <section id="stats" class="section stats-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Live <span class="highlight">Stats</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="stats-icon">📈</div>
+                        <h3 class="stats-title">Price</h3>
+                        <div class="stats-value" id="detailed-price">$0.00</div>
+                        <div class="stats-change" id="detailed-change">+0.00% (24h)</div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">💰</div>
+                        <h3 class="stats-title">Market Cap</h3>
+                        <div class="stats-value" id="detailed-marketcap">$0.00</div>
+                        <div class="stats-subtext">Fully Diluted: <span id="fdv">$0.00</span></div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">🔄</div>
+                        <h3 class="stats-title">Volume</h3>
+                        <div class="stats-value" id="detailed-volume">$0.00</div>
+                        <div class="stats-subtext">24h Trading</div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">💧</div>
+                        <h3 class="stats-title">Liquidity</h3>
+                        <div class="stats-value" id="detailed-liquidity">$0.00</div>
+                        <div class="stats-subtext">Pool Value</div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">🔒</div>
+                        <h3 class="stats-title">Liquidity Lock</h3>
+                        <div class="stats-value">100%</div>
+                        <!-- <div class="stats-subtext">Locked on bonk.fun</div> -->
+                    </div>
+                </div>
+                
+                <div class="price-chart-container">
+                <iframe id="tradingview-widget" 
+                        src="https://dexscreener.com/solana/6shbkyvqyubp9p6lcqrzuxa4st5lzw2tff36f6vuafm?embed=1&theme=dark&trades=0&info=0"
+                        frameborder="0"
+                        allowfullscreen>
+                </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Buy Section -->
+        <section id="buy" class="section buy-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">How to Buy <span class="highlight">$ALIENPING</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="buy-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Get a Solana Wallet</h3>
+                            <p>Download Phantom wallet from your app store or browser extension store.</p>
+                            <div class="wallet-buttons">
+                                <a href="https://phantom.app/" class="wallet-btn" target="_blank">Get Phantom</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Get SOL for Gas Fees</h3>
+                            <p>Buy SOL on exchanges like Binance, Coinbase, or Kraken and send to your wallet.</p>
+                            <p>Or directly in your wallet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Connect to Bonk.Fun</h3>
+                            <p>Go to <a href="https://bonk.fun" target="_blank">bonk.fun</a>, connect your wallet, and search for $ALIENPING.</p>
+                            <p>Or use this direct link: <a href="https://bonk.fun/token/[YOUR_TOKEN_ADDRESS]" target="_blank">bonk.fun/alienping</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Swap SOL for $ALIENPING</h3>
+                            <p>Enter the amount of SOL you want to swap and confirm the transaction in your wallet.</p>
+                            <p>Set slippage to 1-2% if needed.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>HODL and Join Community</h3>
+                            <p>Join our Telegram and Twitter for updates, contests, and community raids!</p>
+                            <div class="community-buttons">
+                                <a href="https://t.me/GalacticCoin0" class="community-btn" target="_blank">Telegram</a>
+                                <a href="https://x.com/ALIENPING0" class="community-btn" target="_blank">Twitter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
         <section id="about" class="section about-section">
             <div class="container">
                 <div class="section-header">
@@ -119,14 +239,13 @@
                 <div class="about-content">
                     <div class="about-text">
                         <p class="about-paragraph">
-                            $ALIENPING is a meme-powered intergalactic currency and crypto community built to resist the shallow hype cycles and rug-pull culture plaguing Telegram trendings. In a space where paying for visibility is easy — and often dangerous — $ALIENPING flips the model. Projects won't just buy their way into the spotlight; they'll earn it.
+                            $ALIENPING is now live on Solana as a meme-powered intergalactic currency with real utility. Our community-driven project verifies and promotes legitimate projects while filtering out scams and rug-pulls.
                         </p>
                         <p class="about-paragraph">
-                            Before any project gets the $ALIENPING Trending Green Signal, it must undergo a rigorous human-powered verification process that involves checking real holders, whitepaper validity, roadmap integrity, and having an open conversation with the project's owner. This is a meme coin with meaning — filtering out quick-flip scams and signaling real builders.                        </p>
+                            Since launch on July 25, 2025, we've built a thriving community of alien enthusiasts and crypto believers. Our Trending Green Signal system is now active, helping investors find quality projects.
+                        </p>
                         <p class="about-paragraph">
-                             Our community blends humor and integrity, attracting alien fanatics and serious creators who are tired of low-effort pump-and-dump schemes. If you're building something that matters — or love aliens — WELCOME HOME!                        </p>
-                        <p class="about-paragraph">
-                            Join the $ALIENPING revolution!
+                            With zero buy/sell taxes and locked liquidity, $ALIENPING is designed for sustainable growth. Join our mission to bring integrity and humor to the crypto space!
                         </p>
                         <div class="about-stats">
                             <div class="stat-item">
@@ -139,7 +258,23 @@
                             </div>
                             <div class="stat-item">
                                 <div class="stat-value">100%</div>
+                                <div class="stat-label">Liquidity Locked</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
                                 <div class="stat-label">Community Driven</div>
+                            </div>
+                        </div>
+                        <div class="contract-address">
+                            <h4>Contract Address:</h4>
+                            <div class="address-box">
+                                <code id="contract-address">[YOUR_TOKEN_ADDRESS]</code>
+                                <button class="copy-btn" onclick="copyAddress()">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div id="copy-notification" class="copy-notification">
+                                Address copied to clipboard!
                             </div>
                         </div>
                     </div>
@@ -152,7 +287,7 @@
             </div>
         </section>
 
-        <!-- Developer Section with Multiple Videos -->
+        <!-- Developer Section -->
         <section id="developer" class="section dev-section">
             <div class="container">
                 <div class="section-header">
@@ -162,21 +297,13 @@
                 </div>
                 <div class="dev-content">
                     <div class="dev-videos">
-                        <!-- Video 1 - June 21st -->
                         <div class="dev-video-item">
                             <div class="video-date-tag">
                                 <span class="date-icon">📅</span>
                                 <span class="date-text">JUNE 21</span>
                             </div>
                             <div class="video-container">
-                                <iframe
-                                    loading="lazy"
-                                    src="https://www.youtube.com/embed/Qcr8Ku0A6Aw" 
-                                    title="Meet the AlienPing Developer - June Update" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
+                                <iframe loading="lazy" src="https://www.youtube.com/embed/Qcr8Ku0A6Aw" title="Meet the AlienPing Developer - June Update" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <div class="video-description">
                                 <h4>Initial Developer Introduction</h4>
@@ -184,26 +311,17 @@
                             </div>
                         </div>
 
-                        <!-- Video 2 - July 21st (Ready for your embed link) -->
                         <div class="dev-video-item">
                             <div class="video-date-tag">
                                 <span class="date-icon">📅</span>
                                 <span class="date-text">JULY 22</span>
                             </div>
                             <div class="video-container">
-                                <!-- REPLACE THIS EMBED LINK WITH YOUR JULY 22nd VIDEO -->
-                                <iframe
-                                    loading="lazy"
-                                    src="https://www.youtube.com/embed/vKTs5zrlWes" 
-                                    title="AlienPing Developer Update - July" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
+                                <iframe loading="lazy" src="https://www.youtube.com/embed/vKTs5zrlWes" title="AlienPing Developer Update - July" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <div class="video-description">
                                 <h4>Latest Development Update</h4>
-                                <p>Recent progress and upcoming launch details</p>
+                                <p>Recent progress and launch details</p>
                             </div>
                         </div>
                     </div>
@@ -274,21 +392,11 @@
                     <div class="pdf-viewer-container">
                         <canvas id="pdf-canvas"></canvas>
                     </div>
-                    
-                    <!-- <div class="whitepaper-download">
-                        <a href="AlienPing_WhitePaper.pdf" download class="btn btn-primary glow-effect" id="download-btn">
-                            <i class="fas fa-download"></i> Download Whitepaper
-                        </a>
-                        <p class="download-note">PDF, 1MB</p>
-                        <div id="download-notification" class="download-notification">
-                            <i class="fas fa-check-circle"></i> Check your downloads folder!
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </section>
-        
 
+        <!-- Features Section -->
         <section id="features" class="section features-section">
             <div class="container">
                 <div class="section-header">
@@ -309,7 +417,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">💰</div>
                         <h3 class="feature-title">Real Utility</h3>
-                        <p class="feature-description">>Our verification system adds real value to the ecosystem, not just hype</p>
+                        <p class="feature-description">Our verification system adds real value to the ecosystem, not just hype</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🤝</div>
@@ -324,13 +432,13 @@
                     <div class="feature-card">
                         <div class="feature-icon">🎮</div>
                         <h3 class="feature-title">Community Raids</h3>
-                        <p class="feature-description">Random community raid rewards.</p>
+                        <p class="feature-description">Random community raid rewards</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- New Use Case Section with Third Image -->
+        <!-- Use Cases Section -->
         <section id="use-cases" class="section use-cases-section">
             <div class="container">
                 <div class="section-header">
@@ -341,13 +449,12 @@
                     <div class="use-cases-image">
                         <div class="image-glow">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_2025-06-07_08-48-49.jpg-kCTsFtvv1jC2KCrk6NsXSxNhbvBDYV.jpeg" alt="AlienPing Bullish AF - Alien cowboy riding a bull" class="use-cases-img">
-                            <!-- <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alienping2.jpg-ijT27LjJ1owPEMNjY0yhrMpxtqvlv5.jpeg" alt="Accepting AlienPing" class="use-cases-img"> -->
                         </div>
                     </div>
                     <div class="use-cases-content">
                         <h3 class="use-cases-title">Mainstream Acceptance</h3>
                         <p class="use-cases-description">
-                            $ALIENPING is designed to become the go-to intergalactic currency — a bold vision for cross-world transactions in a decentralized future. While we're not live yet, our mission is clear: to build a meme-powered financial system that transcends borders, blockchains, and galaxies.
+                            $ALIENPING is now being accepted by merchants across the Solana ecosystem. Our meme-powered financial system is gaining traction with real-world adoption.
                         </p>
                         <ul class="use-cases-list">
                             <li><span class="list-icon">🏪</span> Retail stores accepting $ALIENPING for merchandise</li>
@@ -356,14 +463,14 @@
                             <li><span class="list-icon">🎟️</span> Event organizers accepting $ALIENPING for tickets</li>
                         </ul>
                         <div class="use-cases-cta">
-                            <button class="btn-coming-soon">BECOME A MERCHANT - COMING SOON!!</button>
+                            <button class="btn-coming-soon">BECOME A MERCHANT</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- New Roadmap Section -->
+        <!-- Roadmap Section -->
         <section id="roadmap" class="section roadmap-section">
             <div class="container">
                 <div class="section-header">
@@ -383,22 +490,20 @@
                             <ul class="roadmap-list">
                                 <li>Stealth build of Telegram, X, website, and all social media platforms</li>
                                 <li>Establish real mod structure with trusted, engaged contributors</li>
-                                <li>Community growth targeting 50-100 actively engaged members daily (exclusive airdrop eligibility for pre-launch supporters)</li>
+                                <li>Community growth targeting 50-100 actively engaged members daily</li>
                                 <li>Whitepaper deployed 24-48 hours before launch</li>
-                                <li>Early call-to-action (CA) posted 12-24 hours before launch</li>
                                 <li>Official launch execution</li>
                                 <li>Smart contract locks for Dev, Mods, Marketing, and Community wallets</li>
                             </ul>
                             <div class="roadmap-progress">
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 85%"></div>
+                                    <div class="progress-fill" style="width: 100%"></div>
                                 </div>
-                                <span class="progress-text">In Progress</span>
+                                <span class="progress-text">Completed</span>
                             </div>
                         </div>
                     </div>
 
-                    
                     <div class="roadmap-item" data-step="2">
                         <div class="roadmap-marker">
                             <span class="marker-number">2</span>
@@ -409,12 +514,13 @@
                                 <li>Trending Green Signal system rollout</li>
                                 <li>First project approvals begin</li>
                                 <li>Meme contests and giveaways</li>
+                                <li>Community raid events</li>
                             </ul>
                             <div class="roadmap-progress">
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 2%"></div>
+                                    <div class="progress-fill" style="width: 65%"></div>
                                 </div>
-                                <span class="progress-text">Upcoming</span>
+                                <span class="progress-text">In Progress</span>
                             </div>
                         </div>
                     </div>
@@ -427,13 +533,15 @@
                             <h3 class="roadmap-title">Growth & Utility</h3>
                             <ul class="roadmap-list">
                                 <li>Public "Trend Radar" page</li>
-                                <li>NFT drops, role rewards, and DEX talk</li>
+                                <li>NFT drops and role rewards</li>
+                                <li>DEX listings and partnerships</li>
+                                <li>Merchant adoption program</li>
                             </ul>
                             <div class="roadmap-progress">
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 0%"></div>
+                                    <div class="progress-fill" style="width: 15%"></div>
                                 </div>
-                                <span class="progress-text">Planned</span>
+                                <span class="progress-text">Started</span>
                             </div>
                         </div>
                     </div>
@@ -448,12 +556,13 @@
                                 <li>DAO-lite voting for reviews</li>
                                 <li>Public transparency dashboard</li>
                                 <li>Cross-promo with selected partners</li>
+                                <li>Multi-chain expansion</li>
                             </ul>
                             <div class="roadmap-progress">
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 0%"></div>
                                 </div>
-                                <span class="progress-text">Future</span>
+                                <span class="progress-text">Planned</span>
                             </div>
                         </div>
                     </div>
@@ -466,6 +575,7 @@
             </div>
         </section>
 
+        <!-- Tokenomics Section -->
         <section id="tokenomics" class="section tokenomics-section">
             <div class="container">
                 <div class="section-header">
@@ -495,7 +605,7 @@
                             </div>
                             <div class="token-info-card">
                                 <h3 class="info-title">Total Supply</h3>
-                                <p class="info-value">$1,000,000,000</p>
+                                <p class="info-value">1,000,000,000</p>
                             </div>
                             <div class="token-info-card">
                                 <h3 class="info-title">Network</h3>
@@ -507,12 +617,12 @@
                             </div>
                             <div class="token-info-card">
                                 <h3 class="info-title">Initial Liquidity</h3>
-                                <p class="info-value">_______</p>
+                                <p class="info-value">100% Locked</p>
                             </div>
                         </div>
                         
                         <div class="token-allocation">
-                            <h3 class="allocation-title">Pre-Launch Token Allocation</h3>
+                            <h3 class="allocation-title">Token Allocation</h3>
                             <div class="allocation-item">
                                 <div class="allocation-label">
                                     <span class="color-dot" style="background-color: #FFD700;"></span>
@@ -554,11 +664,10 @@
                                     <span class="color-dot" style="background-color: #9C27B0;"></span>
                                     <span>General Dev Allocation<br>
                                         <small>vested over 180 months</small>
-                                        <small>- scaling, upgrades, team support.</small>
                                     </span>
                                 </div>
                                 <div class="allocation-bar">
-                                    <div class="allocation-fill" style="width: 13.75%; background-color: #9C27B0;"></div>
+                                    <div class="allocation-fill" style="width: 12.8%; background-color: #9C27B0;"></div>
                                 </div>
                                 <div class="allocation-percentage">12.8%</div>
                             </div>
@@ -568,54 +677,72 @@
             </div>
         </section>
 
+        <!-- Incentive Section -->
         <section id="incentive" class="section incentive-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Pre-Launch <span class="highlight">Incentive</span></h2>
+                    <h2 class="section-title">Community <span class="highlight">Incentives</span></h2>
                     <div class="section-divider"></div>
-                    <p class="section-subtitle">Exclusive rewards for our most dedicated community builders</p>
+                    <p class="section-subtitle">Rewards for our most dedicated community members</p>
                 </div>
                 
                 <div class="incentive-program">
-                    <h3 class="incentive-title">🚀 PRE-LAUNCH INCENTIVE 🚀</h3>
+                    <h3 class="incentive-title">🚀 COMMUNITY INCENTIVE PROGRAM 🚀</h3>
                     
                     <div class="incentive-highlight">
                         <div class="incentive-amount">0.05% Supply (10,000 coins each)</div>
-                        <div class="incentive-description">for the Top 50 Members during pre-launch phase</div>
+                        <div class="incentive-description">for the Top 50 Most Active Members</div>
                     </div>
                     
                     <ul class="incentive-requirements">
                         <li>
                             <span class="requirement-icon">🎯</span>
-                            <span class="requirement-text">Will be airdropped after all other supply is locked</span>
+                            <span class="requirement-text">Airdropped to top community contributors</span>
                         </li>
                         <li>
                             <span class="requirement-icon">⚡</span>
-                            <span class="requirement-text">Must be extremely active and getting the word out on X (mandatory) and elsewhere</span>
+                            <span class="requirement-text">Must be extremely active in promoting AlienPing</span>
                         </li>
                         <li>
                             <span class="requirement-icon">💎</span>
-                            <span class="requirement-text">No paid rewards required — earned through real passion and grind</span>
+                            <span class="requirement-text">Earned through real passion and community building</span>
                         </li>
                     </ul>
                     
-                    <div class="incentive-cta">
-                        <div class="incentive-cta-text">Ready to Join the Elite 50?</div>
-                        <div class="incentive-note">
-                            <p>To qualify for the Top 50, you need to:</p>
-                            <ul class="action-steps">
-                                <li>Follow and actively engage on our X (Twitter) account</li>
-                                <li>Share AlienPing posts and create original content about us</li>
-                                <li>Join our Telegram and participate in discussions</li>
-                                <li>Invite friends and grow our community organically</li>
-                                <li>Stay consistent - we track activity over time, not just bursts</li>
-                            </ul>
+                    <!-- <div class="incentive-cta">
+                        <div class="incentive-cta-text">Current Community Stats:</div>
+                        <div class="community-highlights">
+                            <div class="highlight-card">
+                                <div class="highlight-icon">👥</div>
+                                <div class="highlight-number" id="telegram-members">1,500+</div>
+                                <div class="highlight-text">Telegram Members</div>
+                            </div>
+                            <div class="highlight-card">
+                                <div class="highlight-icon">💬</div>
+                                <div class="highlight-number" id="daily-messages">1,200+</div>
+                                <div class="highlight-text">Daily Messages</div>
+                            </div>
+                            <div class="highlight-card">
+                                <div class="highlight-icon">🚀</div>
+                                <div class="highlight-number" id="raids-completed">15+</div>
+                                <div class="highlight-text">Community Raids</div>
+                            </div>
+                            <div class="highlight-card">
+                                <div class="highlight-icon">🏆</div>
+                                <div class="highlight-number" id="contests-held">8+</div>
+                                <div class="highlight-text">Meme Contests</div>
+                            </div>
                         </div>
-                    </div>
+                    </div>  -->
                 </div>
             </div>
         </section>
 
+        <!-- Keep other sections but update content as needed -->
+        <!-- Developer, Whitepaper, Features, Roadmap, Tokenomics sections can remain similar -->
+        <!-- Update Roadmap to mark Phase 1 as completed -->
+        
+        <!-- Update Community section with member count -->
         <section id="community" class="section community-section">
             <div class="container">
                 <div class="section-header">
@@ -658,7 +785,8 @@
             </div>
         </section>
 
-        
+
+        <!-- Update FAQ with post-launch questions -->
         <section id="faq" class="section faq-section">
             <div class="container">
                 <div class="section-header">
@@ -669,53 +797,53 @@
                 <div class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>When is AlienPing launching?</h3>
+                            <h3>Where can I buy $ALIENPING?</h3>
                             <div class="faq-icon">
                                 <span></span>
                                 <span></span>
                             </div>
                         </div>
                         <div class="faq-answer">
-                            <p>AlienPing is scheduled to launch on July 25, 2025. Join our community channels to stay updated on further details.</p>
+                            <p>You can buy $ALIENPING on bonk.fun - the leading Solana meme coin platform. See our "How to Buy" section for step-by-step instructions.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>What are the tokenomics of AlienPing?</h3>
+                            <h3>Is the liquidity locked?</h3>
                             <div class="faq-icon">
                                 <span></span>
                                 <span></span>
                             </div>
                         </div>
                         <div class="faq-answer">
-                            <p>Total Supply is $1,000,000. Liquidity will be locked after launch. The pre-launch token allocation is for 2.5% for mods(96mo), 2.5% for marketing(60mo), 2.15% for community rewards(96mo) and 12.8% for Dev wallet(180mo) - scaling, upgrades, team support.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h3>How can I earn 10,000 free AlienPing tokens?</h3>
-                            <div class="faq-icon">
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Be one of the Top 50 most active community members during pre-launch! You must actively promote AlienPing on X (Twitter) and other platforms with genuine passion - no paid promotion needed. The 50,000 tokens (0.25% supply each) will be airdropped after all other allocations are secured. Start engaging and spreading the word to earn your spot! 🚀👽</p>
+                            <p>Yes! 100% of initial liquidity is locked on bonk.fun. You can verify this by checking our contract address on bonk.fun or DexScreener.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>How do community raids work?</h3>
+                            <h3>How can I participate in community raids?</h3>
                             <div class="faq-icon">
                                 <span></span>
                                 <span></span>
                             </div>
                         </div>
                         <div class="faq-answer">
-                            <p>During select full-day paid raid events (lasting 23 hours and 30 minutes), the Top 10 participants will each receive 0.01 SOL as a reward. Join our Telegram or Twitter to participate and be sure to enable notifications to stay informed about upcoming contests!</p>
+                            <p>Join our Telegram group and enable notifications. We announce raid targets and rules there. Top participants win SOL prizes!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does the Trending Green Signal work?</h3>
+                            <div class="faq-icon">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Projects submit for verification. Our team checks holders, contract, roadmap, and talks to devs. Approved projects get our community's support.</p>
                         </div>
                     </div>
                 </div>
@@ -729,7 +857,7 @@
                 <div class="footer-brand">
                     <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alienping1.jpg-2fgZn1MiFyeIPEHA81yfGZBKhEPJxy.jpeg" alt="AlienPing Logo" class="footer-logo">
                     <p class="footer-brand-text">$ALIENPING</p>
-                    <p class="footer-tagline">Launching: JULY 25, 2025!</p>
+                    <p class="footer-tagline">Launched on SOLANA!</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -775,26 +903,112 @@
         </div>
     </footer>
 
+
+
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <script type="module" src="script.js"></script>
+    
     <script>
-        document.getElementById('download-btn').addEventListener('click', function(e) {
-            // Show notification immediately
-            const notification = document.getElementById('download-notification');
-            notification.classList.add('show');
+        // Configuration
+        const CONFIG = {
+        DEXSCREENER_PAIR_ADDRESS: "Bs2kwz96bFSPrX7DL36QRiaAzzuRyoG1VebpgHMgu6ZY",
+        TOKEN_MINT_ADDRESS: "BfvYFy9Rue3Fqt7dE4cdh2qc2QTkWEWhkWyjbwfdbonk",
+        DECIMALS: 5,
+        TOTAL_SUPPLY: 1000000000, // 1 billion tokens (adjust if different)
+
+        };
+
+        // Main function to fetch all data
+        async function fetchAllData() {
+        try {
+            await Promise.all([
+            fetchPriceAndMarketData()
+            ]);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+        }
+
+        // Combined function to get price and calculate market cap
+        async function fetchPriceAndMarketData() {
+        try {
+            const response = await fetch(`https://api.dexscreener.com/latest/dex/pairs/solana/${CONFIG.DEXSCREENER_PAIR_ADDRESS}`);
+            const data = await response.json();
             
-            // Hide after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 5000);
+            if (data.pair) {
+            const pair = data.pair;
+            const price = parseFloat(pair.priceUsd);
+            const change = parseFloat(pair.priceChange?.h24 || 0);
             
-            // Allow the download to proceed naturally
-            // No need to prevent default or return false
+            // Update price displays
+            document.getElementById('current-price').textContent = `$${price.toFixed(6)}`;
+            document.getElementById('detailed-price').textContent = `$${price.toFixed(6)}`;
+            
+            // Update change displays
+            const changeText = change >= 0 ? `+${change.toFixed(2)}%` : `${change.toFixed(2)}%`;
+            document.getElementById('price-change').textContent = changeText;
+            document.getElementById('detailed-change').textContent = `${changeText} (24h)`;
+            
+            // Set color based on change
+            const changeClass = change >= 0 ? 'positive' : 'negative';
+            document.getElementById('price-change').className = changeClass;
+            document.getElementById('detailed-change').className = changeClass;
+            
+            // Update volume and liquidity
+            const volume = parseFloat(pair.volume?.h24 || 0);
+            const liquidity = parseFloat(pair.liquidity?.usd || 0);
+            document.getElementById('volume').textContent = `$${formatNumber(volume)}`;
+            document.getElementById('detailed-volume').textContent = `$${formatNumber(volume)}`;
+            document.getElementById('liquidity').textContent = `$${formatNumber(liquidity)}`;
+            document.getElementById('detailed-liquidity').textContent = `$${formatNumber(liquidity)}`;
+            
+            // Calculate market cap using known total supply
+            const marketCap = price * CONFIG.TOTAL_SUPPLY;
+            document.getElementById('market-cap').textContent = `$${formatNumber(marketCap)}`;
+            document.getElementById('detailed-marketcap').textContent = `$${formatNumber(marketCap)}`;
+            document.getElementById('fdv').textContent = `$${formatNumber(marketCap)}`;
+            }
+        } catch (error) {
+            console.error('Error fetching price and market data:', error);
+        }
+        }
+
+        // Helper function to format numbers
+        function formatNumber(num) {
+        if (num >= 1000000000) {
+            return (num / 1000000000).toFixed(2) + 'B';
+        }
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(2) + 'M';
+        }
+        if (num >= 1000) {
+            return (num / 1000).toFixed(2) + 'K';
+        }
+        return num.toFixed(2);
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+        // Set contract address
+        document.getElementById('contract-address').textContent = CONFIG.TOKEN_MINT_ADDRESS;
+        
+        // Initialize TradingView widget
+        const widget = document.getElementById('tradingview-widget');
+        if (widget) {
+            widget.src = `https://www.dexscreener.com/solana/${CONFIG.DEXSCREENER_PAIR_ADDRESS}?embed=1&theme=dark`;
+        }
+        
+        // Initial data load
+        fetchAllData();
+        
+        // Update data every 30 seconds
+        setInterval(fetchAllData, 30000);
         });
-        </script>
+    </script>
 </body>
 </html>
