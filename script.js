@@ -310,31 +310,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Header scroll effect
-  let lastScrollTop = 0;
-  const header = document.querySelector(".header");
-
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > 100) {
-      header.style.background = "rgba(0, 0, 0, 0.95)";
-      header.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.5)";
-    } else {
-      header.style.background = "rgba(0, 0, 0, 0.8)";
-      header.style.boxShadow = "none";
-    }
-
-    if (scrollTop > lastScrollTop && scrollTop > 300) {
-      // Scrolling down
-      header.style.transform = "translateY(-100%)";
-    } else {
-      // Scrolling up
-      header.style.transform = "translateY(0)";
-    }
-
-    lastScrollTop = scrollTop;
+  console.log('Copy functionality loaded');
+  
+  // Optional: Add keyboard shortcut (Ctrl+C when address is focused)
+  document.getElementById('contract-address').addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+          e.preventDefault();
+          copyAddress();
+      }
   });
+
+  // // Header scroll effect
+  // let lastScrollTop = 0;
+  // const header = document.querySelector(".header");
+
+  // window.addEventListener("scroll", () => {
+  //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  //   if (scrollTop > 100) {
+  //     header.style.background = "rgba(0, 0, 0, 0.95)";
+  //     header.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.5)";
+  //   } else {
+  //     header.style.background = "rgba(0, 0, 0, 0.8)";
+  //     header.style.boxShadow = "none";
+  //   }
+
+  //   if (scrollTop > lastScrollTop && scrollTop > 300) {
+  //     // Scrolling down
+  //     header.style.transform = "translateY(-100%)";
+  //   } else {
+  //     // Scrolling up
+  //     header.style.transform = "translateY(0)";
+  //   }
+
+  //   lastScrollTop = scrollTop;
+  // });
   
   setTimeout(initPDFViewer, 100);
 });
@@ -528,66 +538,113 @@ function handlePDFError(error) {
   }
 }
 
-// Fallback copy method
+// Fallback copy method for older browsers
 function fallbackCopyToClipboard(text) {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.style.position = "fixed"; // Avoid scrolling to bottom
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-
-  try {
-    const successful = document.execCommand('copy');
-    if (!successful) throw new Error('Copy command failed');
-  } catch (err) {
-    console.error('Fallback copy failed:', err);
-    throw err;
-  } finally {
-    document.body.removeChild(textArea);
-  }
-}
-
-// Updated copy function with fallback
-function copyAddress() {
-  const addressElement = document.getElementById('contract-address');
-  const address = addressElement.textContent.trim();
-  
-  if (address === '[YOUR_TOKEN_ADDRESS]') {
-    showNotification('Please set a real contract address first', 'error');
-    return;
-  }
-
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(address).then(() => {
-      showCopySuccess();
-    }).catch(() => {
-      // If clipboard API fails, try fallback
-      try {
-        fallbackCopyToClipboard(address);
-        showCopySuccess();
-      } catch (err) {
-        showNotification('Failed to copy address', 'error');
-      }
-    });
-  } else {
-    // Browser doesn't support clipboard API, use fallback
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
     try {
-      fallbackCopyToClipboard(address);
-      showCopySuccess();
+        const successful = document.execCommand('copy');
+        if (!successful) throw new Error('Copy command failed');
+        return true;
     } catch (err) {
-      showNotification('Failed to copy address', 'error');
+        console.error('Fallback copy failed:', err);
+        throw err;
+    } finally {
+        document.body.removeChild(textArea);
     }
-  }
 }
 
+// Show notification function
+function showNotification(message, type = 'success') {
+    // Remove any existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+
+    // Create new notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    // Show notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Show copy success using the existing notification element
 function showCopySuccess() {
-  const notification = document.getElementById('copy-notification');
-  notification.classList.add('show');
-  
-  setTimeout(() => {
-    notification.classList.remove('show');
-  }, 2000);
+    const notification = document.getElementById('copy-notification');
+    if (notification) {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 2000);
+    } else {
+        showNotification('Address copied to clipboard!', 'success');
+    }
+}
+
+// Main copy function
+function copyAddress() {
+    const addressElement = document.getElementById('contract-address');
+    if (!addressElement) {
+        showNotification('Address element not found', 'error');
+        return;
+    }
+
+    const address = addressElement.textContent.trim();
+    
+    // Check if address is placeholder
+    if (address === '[YOUR_TOKEN_ADDRESS]' || !address) {
+        showNotification('Please set a real contract address first', 'error');
+        return;
+    }
+
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(address)
+            .then(() => {
+                showCopySuccess();
+            })
+            .catch((err) => {
+                console.error('Clipboard API failed:', err);
+                // Fallback to older method
+                try {
+                    fallbackCopyToClipboard(address);
+                    showCopySuccess();
+                } catch (fallbackErr) {
+                    console.error('Fallback copy failed:', fallbackErr);
+                    showNotification('Failed to copy address', 'error');
+                }
+            });
+    } else {
+        // Browser doesn't support clipboard API or not in secure context
+        try {
+            fallbackCopyToClipboard(address);
+            showCopySuccess();
+        } catch (err) {
+            console.error('Copy failed:', err);
+            showNotification('Failed to copy address', 'error');
+        }
+    }
 }
 
 // CSS Debugging - Add this temporarily
