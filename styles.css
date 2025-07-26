@@ -1216,11 +1216,11 @@ body {
 /* Contract Address Styles for Mobile */
 .contract-address {
   margin-top: var(--space-lg);
-  width: 100%;
+  width: auto;
 }
 
 .contract-address h4 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: var(--space-sm);
 }
 
