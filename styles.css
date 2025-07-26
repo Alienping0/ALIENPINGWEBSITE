@@ -3975,14 +3975,14 @@ body {
   gap: var(--space-xs);
   margin-left: var(--space-md);
   font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   position: relative;
 }
 
 .live-price::before {
   content: '';
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: var(--primary-green);
   border-radius: 50%;
   animation: pulse 1.5s infinite;
@@ -3991,13 +3991,13 @@ body {
 
 #current-price {
   color: var(--primary-gold);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+  letter-spacing: 0.4px;
   text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
 #price-change {
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   padding: 3px 8px;
   border-radius: 12px;
   font-weight: 600;
@@ -4549,6 +4549,10 @@ body {
   
   .price-chart-container {
     height: 450px;
+  }
+
+  #contract-address {
+    font-size: 0.2rem;
   }
 }
 
